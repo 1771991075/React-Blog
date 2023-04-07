@@ -1,23 +1,34 @@
 import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { LoginOutlined } from '@ant-design/icons';
 import './index.css';
+import { useEffect,useState } from 'react';
 const { Header, Content, Footer } = Layout;
 const Index = () => {
+    const location = useLocation()
     const navigate = useNavigate()
+    //定义默认展开的一级菜单key列表
+    let [defaultOpenKeys, setDefaultOpenKeys] = useState('/index/home');
     const {
         token: { colorBgContainer },
     } = theme.useToken();
+
+    useEffect(()=>{
+        // 获取当前路由路径
+        let pathName = location.pathname
+        setDefaultOpenKeys(pathName)
+    },[location])
+
     return (
         <Layout className="layout">
             <Header className='header1'>
                 <div className="logo">
-
+                    <h1>My Blog</h1>
                 </div>
                 <Menu
                     theme="dark"
                     mode="horizontal"
-                    defaultSelectedKeys={['/index/home']}
+                    selectedKeys={defaultOpenKeys}
                     style={{ marginLeft: '100px' }}
                     onClick={(obj) => {
                         navigate(obj.key)

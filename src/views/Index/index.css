@@ -29,3 +29,11 @@
     right: 50px;
     top: 0px;
 }
+
+.logo{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: #fff;
+    margin-left: 50px;
+}
