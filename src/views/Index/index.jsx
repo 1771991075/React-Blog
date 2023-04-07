@@ -1,44 +1,58 @@
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { LoginOutlined } from '@ant-design/icons';
 import './index.css';
 const { Header, Content, Footer } = Layout;
 const Index = () => {
+    const navigate = useNavigate()
     const {
         token: { colorBgContainer },
     } = theme.useToken();
     return (
         <Layout className="layout">
-            <Header>
+            <Header className='header1'>
                 <div className="logo">
-                    
+
                 </div>
                 <Menu
                     theme="dark"
                     mode="horizontal"
-                    defaultSelectedKeys={['0']}
-                    style={{marginLeft:'100px'}}
+                    defaultSelectedKeys={['/index/home']}
+                    style={{ marginLeft: '100px' }}
+                    onClick={(obj) => {
+                        navigate(obj.key)
+                    }}
                     items={[
                         {
-                            key:0,
+                            key: '/index/home',
                             label: `首页`,
                         },
                         {
-                            key:1,
+                            key: '/index/blog',
                             label: `博客`,
                         },
                         {
-                            key:2,
+                            key: '/index/cate',
                             label: `分类`,
                         },
                         {
-                            key:3,
+                            key: '/index/feedback',
                             label: `反馈`,
                         },
                         {
-                            key:4,
+                            key: '/index/about',
                             label: `关于`,
                         }
                     ]}
                 />
+                <div className='goLogin'>
+                    <Button
+                        type="primary"
+                        shape='default'
+                        icon={<LoginOutlined />}
+                        onClick={() => navigate('/login')}
+                    />
+                </div>
             </Header>
             <Content
                 style={{
@@ -57,7 +71,7 @@ const Index = () => {
                         background: colorBgContainer,
                     }}
                 >
-                    Content
+                    <Outlet></Outlet>
                 </div>
             </Content>
             <Footer
@@ -65,7 +79,7 @@ const Index = () => {
                     textAlign: 'center',
                 }}
             >
-                Ant Design ©2023 Created by Ant UED
+                My Blog ©2023 Created by Lzc
             </Footer>
         </Layout>
     );

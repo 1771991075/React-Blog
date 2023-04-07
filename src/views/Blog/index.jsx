@@ -1,7 +1,9 @@
-import React from 'react'
+
 
 export default function Blog() {
     return (
-        <div>Blog</div>
+        <div>
+            <h1>博客页面</h1>
+        </div>
     )
 }

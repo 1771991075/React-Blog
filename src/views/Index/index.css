@@ -19,3 +19,13 @@
 .layout{
     min-height: 100vh;
 }
+
+.header1{
+    position: relative;
+}
+
+.goLogin{
+    position: absolute;
+    right: 50px;
+    top: 0px;
+}
