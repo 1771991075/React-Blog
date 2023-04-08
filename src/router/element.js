@@ -8,6 +8,7 @@ const Cate = lazy(()=>import('../views/Cate'));
 const About = lazy(()=>import('../views/About'));
 const Feedback = lazy(()=>import('../views/Feedback'));
 const Login = lazy(()=>import('../views/Login'));
+const Admin = lazy(()=>import('../views/Admin'));
 const NotFound = lazy(()=>import('../component/NotFound'));
 
 let element = [
@@ -46,6 +47,11 @@ let element = [
     {
         path:'/login',
         element:<Suspense fallback={<Loading/>}><Login /></Suspense>,
+        author: false
+    },
+    {
+        path:'/admin',
+        element:<Suspense fallback={<Loading/>}><Admin /></Suspense>,
         author: false
     },
     {

@@ -18,7 +18,7 @@ export default function IndexCate() {
       >
         {
           cateList.length !== 0 && cateList.map((item,index)=>{
-            return <Button type='primary' key={index} style={{margin:'0px 10px 10px 0px'}}>{item}</Button>
+            return <Button type='primary' key={index} style={{margin:'0px 10px 10px 0px',borderRadius:'0px'}}>{item}</Button>
           })
         }
       </Card>
