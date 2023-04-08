@@ -3,7 +3,7 @@ let defaultState = {
     token:localStorage.getItem('token')
 }
 
-let userReducer = (state,actions)=>{
+let userReducer = (state=defaultState,actions)=>{
     switch(actions.type){
         case 'SET_USER_INFO':
             let userState = { ...state }
