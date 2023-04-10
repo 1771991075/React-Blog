@@ -3,9 +3,11 @@ import { legacy_createStore as createStore , compose , combineReducers ,applyMid
 import ReduxThunk from 'redux-thunk';
 //引入userReducer
 import userReducer from './reducer/userReducer';
+import blogTitleReducer from './reducer/blogTitleReducer';
 
 let reducer = combineReducers({
-    userReducer
+    userReducer,
+    blogTitleReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
