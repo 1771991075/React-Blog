@@ -15,7 +15,7 @@ export default function Home() {
                 <Col flex="0 1 300px">
                     <IndexUserInfo></IndexUserInfo>
                     <IndexCate></IndexCate>
-                    <Calendar></Calendar>
+                    {/* <Calendar></Calendar> */}
                 </Col>
             </Row>
         </div>

@@ -6,7 +6,7 @@ import CateProgress from '../../component/Blog/Progress';
 export default function Blog() {
     return (
         <div>
-            <Divider orientation="left">Raw flex style</Divider>
+            <Divider orientation="left">Tag</Divider>
             <Row>
                 <Col flex="0 1 300px">
                     <AllCate></AllCate>
