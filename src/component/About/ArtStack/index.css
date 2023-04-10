@@ -1,0 +1,9 @@
+.aboutbg{
+    overflow: hidden;
+}
+.aboutbg:hover img{
+    transform: scale(1.1);
+}
+.aboutbg img{
+    transition: all 0.5s;
+}
