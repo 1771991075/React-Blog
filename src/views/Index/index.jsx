@@ -1,4 +1,4 @@
-import { Breadcrumb, Layout, Menu, theme, Button, Switch, FloatButton } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Button, Switch, FloatButton, Tag } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { LoginOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
@@ -100,7 +100,16 @@ const Index = () => {
                     textAlign: 'center',
                 }}
             >
-                My Blog ©2023 Created by Lzc
+                <div>
+                    <p>My Blog ©2023 Created by Lzc</p>
+                    <p className='indexbottom'>
+                        <Tag bordered={false} className='tag1'>React</Tag>
+                        <Tag bordered={false} className='tag1'>React-Router</Tag>
+                        <Tag bordered={false} className='tag1'>Redux</Tag>
+                        <Tag bordered={false} className='tag1'>Ant Design</Tag>
+                        <Tag bordered={false} className='tag1'>Echarts</Tag>
+                    </p>
+                </div>
             </Footer>
             <>
                 <FloatButton.Group

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { userLogin } from '../../api/login';
 import { useDispatch } from 'react-redux';
 import userActions from '../../redux/actions/userActions';
-import './index.css'
+import './index.css';
 export default function Login() {
     let disPatch = useDispatch();
     let navigate = useNavigate();

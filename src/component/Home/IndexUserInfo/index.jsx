@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { GithubOutlined, TwitterOutlined, WechatOutlined, QqOutlined } from '@ant-design/icons';
+import { GithubOutlined, MailOutlined, WechatOutlined, QqOutlined } from '@ant-design/icons';
 import { Avatar, Card, Popover, Skeleton } from 'antd';
+import { Link } from 'react-router-dom';
 const { Meta } = Card;
 // 微信/QQ二维码
 const content = (
@@ -30,7 +31,7 @@ export default function IndexUserInfo() {
                         style={{ width: 300, marginBottom: '20px' }}
                         actions={[
                             <GithubOutlined style={{ fontSize: '20px' }} />,
-                            <TwitterOutlined style={{ fontSize: '20px' }} />,
+                            <MailOutlined style={{ fontSize: '20px' }} />,
                             <Popover content={content}>
                                 <WechatOutlined style={{ fontSize: '20px' }} />
                             </Popover>,
@@ -58,7 +59,7 @@ export default function IndexUserInfo() {
                         }
                         actions={[
                             <GithubOutlined style={{ fontSize: '20px' }} />,
-                            <TwitterOutlined style={{ fontSize: '20px' }} />,
+                            <Link to="mailto:lvzicong123@outlook.com"><MailOutlined style={{ fontSize: '20px' }} /></Link>,
                             <Popover content={content}>
                                 <WechatOutlined style={{ fontSize: '20px' }} />
                             </Popover>,
