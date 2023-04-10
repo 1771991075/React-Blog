@@ -9,6 +9,12 @@ const About = lazy(()=>import('../views/About'));
 const Feedback = lazy(()=>import('../views/Feedback'));
 const Login = lazy(()=>import('../views/Login'));
 const Admin = lazy(()=>import('../views/Admin'));
+const AdminAddBlog = lazy(()=>import('../views/AdminAddBlog'));
+const AdminBlogList = lazy(()=>import('../views/AdminBlogList'));
+const AdminCateList = lazy(()=>import('../views/AdminCateList'));
+const AdminChangeBlog = lazy(()=>import('../views/AdminChangeBlog'));
+const AdminEcharts = lazy(()=>import('../views/AdminEcharts'));
+const AdminHome = lazy(()=>import('../views/AdminHome'));
 const NotFound = lazy(()=>import('../component/NotFound'));
 
 let element = [
@@ -52,7 +58,39 @@ let element = [
     {
         path:'/admin',
         element:<Suspense fallback={<Loading/>}><Admin /></Suspense>,
-        author: false
+        author: true,
+        children:[
+            {
+                path:'adminhome',
+                element:<Suspense fallback={<Loading/>}><AdminHome /></Suspense>,
+                author: true,
+            },
+            {
+                path:'adminbloglist',
+                element:<Suspense fallback={<Loading/>}><AdminBlogList /></Suspense>,
+                author: true,
+            },
+            {
+                path:'adminaddblog',
+                element:<Suspense fallback={<Loading/>}><AdminAddBlog /></Suspense>,
+                author: true,
+            },
+            {
+                path:'adminchangeblog',
+                element:<Suspense fallback={<Loading/>}><AdminChangeBlog /></Suspense>,
+                author: true,
+            },
+            {
+                path:'admincatelist',
+                element:<Suspense fallback={<Loading/>}><AdminCateList /></Suspense>,
+                author: true,
+            },
+            {
+                path:'adminecharts',
+                element:<Suspense fallback={<Loading/>}><AdminEcharts /></Suspense>,
+                author: true,
+            }
+        ]
     },
     {
         path:'/',
