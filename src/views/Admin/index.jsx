@@ -5,17 +5,35 @@ import {
     UserOutlined,
     VideoCameraOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, theme, Button, Breadcrumb } from 'antd';
+import { Layout, Menu, theme, Button, Breadcrumb, Modal } from 'antd';
 import React, { useState } from 'react';
 import kun from '../../assets/kunkun.jpg';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import './index.css';
 const { Header, Sider, Content } = Layout;
 const Admin = () => {
+    const navigate = useNavigate()
     const [collapsed, setCollapsed] = useState(false);
     const {
         token: { colorBgContainer },
     } = theme.useToken();
+    // 退出对话框
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => { setIsModalOpen(true) };
+    //退出登录
+    const handleOk = () => {
+        localStorage.removeItem('token')
+        setIsModalOpen(false)
+        navigate('/login')
+    };
+    //取消退出登录
+    const handleCancel = () => {
+        setIsModalOpen(false)
+    };
+    // 退出登录
+    let exit = () => {
+        showModal()
+    }
     return (
         <Layout>
             <Sider trigger={null} collapsible collapsed={collapsed} style={{ height: '100vh', position: 'sticky', top: '0px' }}>
@@ -54,7 +72,10 @@ const Admin = () => {
                     {
                         !collapsed && <MenuFoldOutlined style={{ fontSize: '20px' }} onClick={() => setCollapsed(!collapsed)} />
                     }
-                    <Button type="primary">退出</Button>
+                    <Button type="primary" onClick={exit}>退出</Button>
+                    <Modal title="提示" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText={'确认'} cancelText={'取消'}>
+                        <p>是否退出登录?</p>
+                    </Modal>
                 </Header>
                 <Breadcrumb style={{ padding: '10px 20px' }} />
                 <Content

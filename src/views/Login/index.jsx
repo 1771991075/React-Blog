@@ -2,8 +2,12 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Input, Button, message } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { userLogin } from '../../api/login';
+import { useDispatch } from 'react-redux';
+import userActions from '../../redux/actions/userActions';
 import './index.css'
 export default function Login() {
+    let disPatch = useDispatch();
     let navigate = useNavigate();
     // 定义用户名状态
     let [username, setUsername] = useState('')
@@ -18,6 +22,27 @@ export default function Login() {
             messageApi.warning("请您补充完整信息")
             return
         }
+        let data = {username,password}
+        // 发送请求实现登录
+        setLoading(true)
+        let res = await userLogin(data)
+        setLoading(false)
+        if(res.data.code === 200 && res.data.msg === '登录成功'){
+            message.success(res.data.msg)
+            // 登录成功将 token 存储到本地
+            localStorage.setItem("token", res.data.data.token);
+            localStorage.setItem("username", res.data.data.username);
+            // 提交actions更改redux中存储的token username
+            disPatch(userActions({
+                username:res.data.data.username,
+                token:res.data.data.token
+            }))
+            setTimeout(() => {
+                navigate("/admin")
+            }, 1000);
+            return
+        }
+        message.error(res.data.msg)
     }
     return (
         <div className='login'>
