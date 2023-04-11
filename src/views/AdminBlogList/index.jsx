@@ -1,16 +1,21 @@
 import { Space, Table, Tag, Button, Pagination } from 'antd';
+import {getBlogList} from '../../api/login';
+import { useEffect, useState } from 'react';
 const columns = [
     {
         title: '标题',
         dataIndex: 'title',
+        width:400
     },
     {
         title: '发布时间',
-        dataIndex: 'time',
+        dataIndex: 'timer',
+        width:200
     },
     {
         title: '分类',
         dataIndex: 'cate',
+        width:150,
         render: (_, record) => (
             <Space size="middle">
                 <Tag color='#1677ff'>{record.cate}</Tag>
@@ -18,12 +23,12 @@ const columns = [
         ),
     },
     {
-        title: 'Tags',
-        dataIndex: 'tags',
-        render: (_, { tags }) => (
+        title: 'Tag',
+        dataIndex: 'tag',
+        render: (_, { tag }) => (
             <>
-                {tags.map((tag) => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
+                {tag.map((tag) => {
+                    let color = tag.length > 2 ? 'geekblue' : 'purple';
                     if (tag === 'loser') {
                         color = 'volcano';
                     }
@@ -47,26 +52,32 @@ const columns = [
         ),
     },
 ];
-let data = [
-    {
-        key: '1',
-        title: 'John Brown',
-        time: '1681133051159',
-        cate: 'React',
-        tags: ['nice', 'developer'],
-    },
-];
 
 export default function AdminBlogList() {
+    let [blogList,setBlogList] = useState([])
     //切换分页
     const onChange = (pageNumber) => {
         console.log('Page: ', pageNumber);
     };
+    const getblog = async()=>{
+        let res = await getBlogList()
+        console.log(res);
+        res.data.data.bloglist.forEach((item,index) => {
+            item.tag = item.tag.split(',')
+        });
+        setBlogList(res.data.data.bloglist)
+    }
+
+    useEffect(()=>{
+        getblog()
+    },[])
 
     return (
         <div>
-            <Table columns={columns} dataSource={data} bordered={true} pagination={false} />
-            <Pagination showQuickJumper defaultCurrent={1} total={20} pageSizeOptions={[5, 10, 20]} onChange={onChange} showSizeChanger style={{marginTop:'20px'}} />
+            {
+                blogList.length !== 0 && <Table columns={columns} dataSource={blogList} bordered={true} pagination={false} rowKey='id'/> 
+            }
+            <Pagination showQuickJumper defaultCurrent={1} total={blogList.length} pageSizeOptions={[5, 10, 20]} onChange={onChange} showSizeChanger style={{marginTop:'20px'}} />
         </div>
     )
 }

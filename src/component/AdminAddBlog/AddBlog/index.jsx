@@ -1,13 +1,21 @@
 import { Button, Form, Input } from 'antd';
+import AddTag from '../AddTag';
+import { useState } from 'react';
 
 export default function AdminAddBlog(props) {
+    let [tag,setTag] = useState([])
     const onFinish = (values) => {
-        console.log('Success:', values);
+        values.tag = tag.join(',');
+        props.getBlogInfo(values)
         props.nextBtn()
     };
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+    //获取标签数组
+    const getTag = (tags) =>{
+        setTag(tags)
+    }
     return (
         <div>
             <Form
@@ -45,6 +53,12 @@ export default function AdminAddBlog(props) {
                     rules={[{ required: true }]}
                 >
                     <Input />
+                </Form.Item>
+                <Form.Item
+                    label="博客标签"
+                    name="tag"
+                >
+                    <AddTag getTag={getTag} tag={tag}></AddTag>
                 </Form.Item>
 
                 <Form.Item
