@@ -37,7 +37,10 @@ const AdminAddBlog = () => {
         obj.star = 0
         //发送请求保存到数据库
         let res = await setBlog(obj)
-        next()
+        if(res.data.status === 200){
+            message.success(res.data.msg)
+            next()
+        }
     }
     const steps = [
         {
