@@ -47,8 +47,9 @@ export default function AdminCateList() {
                 }
                 message.error(res.data.msg)
             }
+        }else{
+            message.error('请输入类名')
         }
-        message.error('请输入类名')
     };
     const handleCancel = () => {
         setCate('')
