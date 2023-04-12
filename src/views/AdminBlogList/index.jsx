@@ -72,7 +72,6 @@ export default function AdminBlogList() {
             okType: 'danger',
             cancelText: '取消',
             onOk() {
-                console.log('OK');
                 delBlog(id)
             },
             onCancel() {

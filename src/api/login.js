@@ -17,12 +17,22 @@ const deleteBlog = (data) => http(`/delete/blog`, 'post', data, {
 })
 
 //获取分类列表
-const getCateList = () =>http(`/getcatelist`,'get')
+const getCateList = () => http(`/getcatelist`, 'get')
+//添加分类
+const addCate = (data) => http(`/add/cate`, 'post', data, {
+    "Content-Type": "application/x-www-form-urlencoded"
+})
+//删除分类
+const deleteCate = (data) => http(`/delete/cate`, 'post', data, {
+    "Content-Type": "application/x-www-form-urlencoded"
+})
 
 export {
     userLogin,
     setBlog,
     getBlogList,
     deleteBlog,
-    getCateList
+    getCateList,
+    deleteCate,
+    addCate
 }
