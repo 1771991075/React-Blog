@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Button, Table, message, Modal } from 'antd';
-import { getCateList, deleteCate,addCate } from '../../api/login';
+import { Input, Button, Table, message, Modal  } from 'antd';
+import { getCateList, deleteCate, addCate } from '../../api/login';
 import { ExclamationCircleFilled } from '@ant-design/icons';
+const { Search } = Input;
 const { confirm } = Modal;
 export default function AdminCateList() {
     let [cateList, setCateList] = useState([])
-    let [cate,setCate] = useState('')
+    let [cate, setCate] = useState('')
 
     const columns = [
         {
@@ -32,13 +33,13 @@ export default function AdminCateList() {
         setOpen(true);
     };
     const handleOk = async () => {
-        if(cate){
-            let index = cateList.findIndex(item=>item.name === cate)
-            if(index!==-1){
+        if (cate) {
+            let index = cateList.findIndex(item => item.name === cate)
+            if (index !== -1) {
                 message.error('该类名已存在')
-            }else{
-                let res = await addCate({name:cate})
-                if(res.data.status === 200){
+            } else {
+                let res = await addCate({ name: cate })
+                if (res.data.status === 200) {
                     message.success(res.data.msg)
                     setCate('')
                     getCate()
@@ -47,7 +48,7 @@ export default function AdminCateList() {
                 }
                 message.error(res.data.msg)
             }
-        }else{
+        } else {
             message.error('请输入类名')
         }
     };
@@ -89,6 +90,8 @@ export default function AdminCateList() {
         let res = await getCateList()
         setCateList(res.data.data.cateList)
     }
+    //查询分类
+    const onSearch = (value) => console.log(value);
 
     useEffect(() => {
         getCate()
@@ -97,7 +100,14 @@ export default function AdminCateList() {
     return (
         <div>
             <div>
-                <Input placeholder="请输入类别" style={{ width: '300px', margin: '0px 20px 20px 0px' }} />
+                <Search
+                    placeholder="请输入类名"
+                    onSearch={onSearch}
+                    style={{
+                        width: 300,
+                        margin: '0px 20px 20px 0px'
+                    }}
+                />
                 <Button type='primary' onClick={showModal}>添加分类</Button>
                 <Modal
                     title="添加分类"
@@ -107,7 +117,7 @@ export default function AdminCateList() {
                     okText='确定添加'
                     cancelText='取消'
                 >
-                    <Input placeholder='请输入类别名称' value={cate} onChange={(e)=>{
+                    <Input placeholder='请输入类别名称' value={cate} onChange={(e) => {
                         setCate(e.target.value)
                     }}></Input>
                 </Modal>

@@ -1,15 +1,15 @@
-import { Button, message, Steps, theme } from 'antd';
+import { Button, message, Steps, theme, Result } from 'antd';
 import { useState, useRef } from 'react';
 import AddBlog from '../../component/AdminAddBlog/AddBlog';
 import AddContent from '../../component/AdminAddBlog/AddContent';
 import moment from 'moment/moment';
 import { nanoid } from 'nanoid';
-import {setBlog} from '../../api/login';
+import { setBlog } from '../../api/login';
 import { useNavigate } from 'react-router-dom';
 
 const AdminAddBlog = () => {
     let navigate = useNavigate()
-    let [blogInfo,setBlogInfo] = useState(null)
+    let [blogInfo, setBlogInfo] = useState(null)
     //商品富文本标签
     let contentRef = useRef();
     //传给子组件下一步回调
@@ -17,12 +17,12 @@ const AdminAddBlog = () => {
         next()
     }
     //收集博客数据
-    const getBlogInfo = (value)=>{
+    const getBlogInfo = (value) => {
         setBlogInfo(value)
     }
     //保存博客
-    const addBlogInfo = async ()=>{
-        if(!contentRef.current.myEditor.txt.html()){
+    const addBlogInfo = async () => {
+        if (!contentRef.current.myEditor.txt.html()) {
             message.error('请输入正文')
             return
         }
@@ -37,7 +37,7 @@ const AdminAddBlog = () => {
         obj.star = 0
         //发送请求保存到数据库
         let res = await setBlog(obj)
-        if(res.data.status === 200){
+        if (res.data.status === 200) {
             message.success(res.data.msg)
             next()
         }
@@ -52,14 +52,29 @@ const AdminAddBlog = () => {
             content: <div>
                 <AddContent ref={contentRef} ></AddContent>
                 <div>
-                    <Button onClick={()=>prev} style={{ marginRight: '10px' }}>上一步</Button>
-                    <Button type='primary' onClick={()=>addBlogInfo()}>完成</Button>
+                    <Button onClick={() => prev()} style={{ marginRight: '10px' }}>上一步</Button>
+                    <Button type='primary' onClick={() => addBlogInfo()}>完成</Button>
                 </div>
             </div>,
         },
         {
             title: '发表博客',
-            content: '',
+            content: <div>
+                <Result
+                    status="success"
+                    title="恭喜您,博客发表成功!"
+                    extra={[
+                        <Button type="primary" key="console" onClick={()=>{
+                            navigate('/admin/adminaddblog')
+                        }}>
+                            重新撰写
+                        </Button>,
+                        <Button key="buy" onClick={()=>{
+                            navigate('/admin/adminbloglist')
+                        }}>博客列表</Button>,
+                    ]}
+                />
+            </div>,
         },
     ];
     const { token } = theme.useToken();
@@ -89,20 +104,6 @@ const AdminAddBlog = () => {
         <>
             <Steps current={current} items={items} />
             <div style={contentStyle}>{steps[current].content}</div>
-            <div
-                style={{
-                    marginTop: 24,
-                }}
-            >
-                {current === steps.length - 1 && (
-                    <Button type="primary" onClick={() => {
-                        message.success('发表成功!')
-                        navigate('/admin/adminbloglist')
-                    }}>
-                        完成
-                    </Button>
-                )}
-            </div>
         </>
     );
 };
