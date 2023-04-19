@@ -56,7 +56,7 @@ const Index = () => {
                         },
                         {
                             key: '/index/feedback',
-                            label: `反馈`,
+                            label: `归档`,
                         },
                         {
                             key: '/index/about',

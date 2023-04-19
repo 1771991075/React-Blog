@@ -11,7 +11,9 @@ const IndexCalendar = () => {
   };
   return (
     <div style={wrapperStyle}>
-      <Calendar fullscreen={false} onPanelChange={onPanelChange} />
+      <Calendar
+        fullscreen={false} 
+        onPanelChange={onPanelChange} />
     </div>
   );
 };

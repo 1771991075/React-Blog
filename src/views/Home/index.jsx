@@ -1,7 +1,6 @@
 import { Col, Divider, Row } from 'antd';
 import IndexBlog from '../../component/Home/IndexBlog';
 import IndexUserInfo from '../../component/Home/IndexUserInfo';
-import Calendar from '../../component/Home/Calendar';
 import IndexCate from '../../component/Home/IndexCate';
 
 export default function Home() {
@@ -15,7 +14,6 @@ export default function Home() {
                 <Col flex="0 1 300px">
                     <IndexUserInfo></IndexUserInfo>
                     <IndexCate></IndexCate>
-                    {/* <Calendar></Calendar> */}
                 </Col>
             </Row>
         </div>
