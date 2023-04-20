@@ -50,7 +50,7 @@ export default function IndexUserInfo() {
                     >
                         <Skeleton loading={loading} avatar active>
                             <Meta
-                                avatar={<Avatar src="https://joesch.moe/api/v1/random?key=2" />}
+                                avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
                                 title="Card title"
                                 description="This is the description"
                             />
@@ -77,7 +77,7 @@ export default function IndexUserInfo() {
                         ]}
                     >
                         <Meta
-                            avatar={<Avatar src="https://joesch.moe/api/v1/random" />}
+                            avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
                             title="个人博客"
                             description="This is my blog"
                         />
