@@ -1,18 +1,26 @@
 import { useEffect, useState } from 'react';
 import { GithubOutlined, MailOutlined, WechatOutlined, QqOutlined } from '@ant-design/icons';
-import { Avatar, Card, Popover, Skeleton } from 'antd';
+import { Avatar, Card, Popover, Skeleton, QRCode } from 'antd';
 import { Link } from 'react-router-dom';
 const { Meta } = Card;
-// 微信/QQ二维码
-const content = (
-    <div>
-        <p>Content</p>
-    </div>
-);
-
 export default function IndexUserInfo() {
     //预加载个人信息卡片
     const [loading, setLoading] = useState(true);
+    //微信/
+    const [text, setText] = useState('https://ant.design/');
+    //qq
+
+    // 微信/QQ二维码
+    const contentwx = (
+        <div>
+            <QRCode value={text || '-'} size={100} />
+        </div>
+    );
+    const contentqq = (
+        <div>
+            <QRCode value={text || '-'} size={100} />
+        </div>
+    );
 
     useEffect(() => {
         let timer1 = setTimeout(() => {
@@ -32,10 +40,10 @@ export default function IndexUserInfo() {
                         actions={[
                             <GithubOutlined style={{ fontSize: '20px' }} />,
                             <MailOutlined style={{ fontSize: '20px' }} />,
-                            <Popover content={content}>
+                            <Popover content={contentwx}>
                                 <WechatOutlined style={{ fontSize: '20px' }} />
                             </Popover>,
-                            <Popover content={content}>
+                            <Popover content={contentqq}>
                                 <QqOutlined style={{ fontSize: '20px' }} />
                             </Popover>
                         ]}
@@ -60,10 +68,10 @@ export default function IndexUserInfo() {
                         actions={[
                             <GithubOutlined style={{ fontSize: '20px' }} />,
                             <Link to="mailto:lvzicong123@outlook.com"><MailOutlined style={{ fontSize: '20px' }} /></Link>,
-                            <Popover content={content}>
+                            <Popover content={contentwx}>
                                 <WechatOutlined style={{ fontSize: '20px' }} />
                             </Popover>,
-                            <Popover content={content}>
+                            <Popover content={contentqq}>
                                 <QqOutlined style={{ fontSize: '20px' }} />
                             </Popover>
                         ]}

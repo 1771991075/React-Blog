@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import Tag from '../Tag';
 
-export default function Feed() {
+export default function Feed(props) {
     return (
         <div>
-            <p>2022-09-01</p>
-            <div>
-                <h1>内容</h1>
+            <p>{props.year}年</p>
+            <div style={{padding:'10px 0px 0px 0px'}}>
+                <Tag year={props.year}></Tag>
             </div>
         </div>
     )
