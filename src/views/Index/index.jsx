@@ -102,7 +102,7 @@ const Index = () => {
                 </div>
             </Header>
 
-            <Content style={{ padding: '0 50px' }}>
+            <Content style={{ padding: '0 50px' }} >
                 <div className="site-layout-content">
                     <Outlet></Outlet>
                 </div>
@@ -121,7 +121,7 @@ const Index = () => {
             </Content>
 
             <>
-                <FloatButton.BackTop visibilityHeight={200} />
+                <FloatButton.BackTop visibilityHeight={200}/>
             </>
         </Layout>
     );

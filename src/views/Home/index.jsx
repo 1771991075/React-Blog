@@ -4,7 +4,8 @@ import IndexUserInfo from '../../component/Home/IndexUserInfo';
 import IndexCate from '../../component/Home/IndexCate';
 import { DownCircleOutlined } from '@ant-design/icons';
 
-export default function Home() {
+function Home() {
+
     return (
         <div>
             <div className='homebgbtn' style={{ width: '100%', height: 'calc(100vh - 50px)'}}>
@@ -33,6 +34,9 @@ export default function Home() {
                 </Col>
             </Row>
             
+            
         </div>
     )
 }
+
+export default Home
