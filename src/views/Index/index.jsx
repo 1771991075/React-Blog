@@ -1,25 +1,34 @@
-import { Breadcrumb, Layout, Menu, theme, Button, Switch, FloatButton, Tag } from 'antd';
+import {  Layout, Menu, Button, FloatButton, Tag, Dropdown, Space, Typography } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { LoginOutlined } from '@ant-design/icons';
+import { LoginOutlined, BgColorsOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
+import bg1 from '../../assets/img/bg1.jpg';
+import bg2 from '../../assets/img/bg2.jpg';
+import bg3 from '../../assets/img/bg3.jpg';
 import './index.css';
 const { Header, Content, Footer } = Layout;
 const Index = () => {
     const location = useLocation()
     const navigate = useNavigate()
-    //两种主题
-    const [theme1, setTheme] = useState('dark');
-    const dark = { background: '#001529', color: '#fff', transition: 'all 0.5s' }
-    const light = { background: '#fff', color: '#000', transition: 'all 0.5s' }
+    //三种主题
+    const [bg,setBg] = useState(bg1)
+    const items = [
+        {
+            key: 'bg1',
+            label: 'style1',
+        },
+        {
+            key: 'bg2',
+            label: 'style2',
+        },
+        {
+            key: 'bg3',
+            label: 'style3',
+        },
+    ];
     //定义默认展开的一级菜单key列表
     let [defaultOpenKeys, setDefaultOpenKeys] = useState('/index/home');
-    const {
-        token: { colorBgContainer },
-    } = theme.useToken();
     //改变主题
-    const changeTheme = (value) => {
-        setTheme(value ? 'dark' : 'light');
-    };
 
     useEffect(() => {
         // 获取当前路由路径
@@ -28,13 +37,13 @@ const Index = () => {
     }, [location])
 
     return (
-        <Layout className="layout">
-            <Header className='header1' style={theme1 === 'dark' ? dark : light}>
-                <div className="logo" style={theme1 === 'dark' ? dark : light}>
+        <Layout className="layout" style={{ backgroundImage: `url(${bg})`}}>
+            <Header className='header1' >
+                <div className="logo" >
                     <h1>My Blog</h1>
                 </div>
                 <Menu
-                    theme={theme1}
+                    className='indextab'
                     mode="horizontal"
                     selectedKeys={defaultOpenKeys}
                     style={{ marginLeft: '100px' }}
@@ -65,7 +74,24 @@ const Index = () => {
                     ]}
                 />
                 <div className='goLogin'>
-                    <Switch checked={theme1 === 'dark'} onChange={changeTheme} checkedChildren="Dark" unCheckedChildren="Light" />
+                    <Dropdown
+                        placement='bottom'
+                        menu={{
+                            items,
+                            selectable: true,
+                            onClick: (e) => {
+                                e.key === 'bg1' && setBg(bg1)
+                                e.key === 'bg2' && setBg(bg2)
+                                e.key === 'bg3' && setBg(bg3)
+                            }
+                        }}
+                    >
+                        <Typography.Link>
+                            <Space className='stylebox'>
+                                <BgColorsOutlined className='stylebtn' />
+                            </Space>
+                        </Typography.Link>
+                    </Dropdown>
                     <Button
                         style={{ marginLeft: '20px' }}
                         type="primary"
@@ -75,51 +101,27 @@ const Index = () => {
                     />
                 </div>
             </Header>
-            <Content
-                style={{
-                    padding: '0 50px',
-                }}
-            >
-                <Breadcrumb
-                    style={{
-                        margin: '16px 0',
-                    }}
-                >
-                </Breadcrumb>
-                <div
-                    className="site-layout-content"
-                    style={{
-                        background: colorBgContainer,
-                    }}
-                >
+
+            <Content style={{ padding: '0 50px' }}>
+                <div className="site-layout-content">
                     <Outlet></Outlet>
                 </div>
+                <Footer className='footer'  style={{ textAlign: 'center'}}>
+                    <div>
+                        <p>My Blog ©2023 Created by Lzc</p>
+                        <p className='indexbottom'>
+                            <Tag bordered={false} className='tag1'>React</Tag>
+                            <Tag bordered={false} className='tag1'>React-Router</Tag>
+                            <Tag bordered={false} className='tag1'>Redux</Tag>
+                            <Tag bordered={false} className='tag1'>Ant Design</Tag>
+                            <Tag bordered={false} className='tag1'>Echarts</Tag>
+                        </p>
+                    </div>
+                </Footer>
             </Content>
-            <Footer
-                style={{
-                    textAlign: 'center',
-                }}
-            >
-                <div>
-                    <p>My Blog ©2023 Created by Lzc</p>
-                    <p className='indexbottom'>
-                        <Tag bordered={false} className='tag1'>React</Tag>
-                        <Tag bordered={false} className='tag1'>React-Router</Tag>
-                        <Tag bordered={false} className='tag1'>Redux</Tag>
-                        <Tag bordered={false} className='tag1'>Ant Design</Tag>
-                        <Tag bordered={false} className='tag1'>Echarts</Tag>
-                    </p>
-                </div>
-            </Footer>
+
             <>
-                <FloatButton.Group
-                    shape="circle"
-                    style={{
-                        right: 24,
-                    }}
-                >
-                    <FloatButton.BackTop visibilityHeight={200} />
-                </FloatButton.Group>
+                <FloatButton.BackTop visibilityHeight={200} />
             </>
         </Layout>
     );
