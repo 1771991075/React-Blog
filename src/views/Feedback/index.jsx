@@ -1,6 +1,7 @@
 import { Col, Divider, Row, Timeline } from 'antd';
 import Feed from '../../component/Feedback/Feed';
 import IndexCalendar from '../../component/Home/Calendar';
+import './index.css';
 export default function Feedback() {
     return (
         <div>
@@ -9,7 +10,7 @@ export default function Feedback() {
                 <Col flex="0 1 300px" style={{marginRight:'30px'}}>
                     <IndexCalendar></IndexCalendar>
                 </Col>
-                <Col flex="1 1 300px" style={{height:'400px',overflowY:'scroll'}}>
+                <Col flex="1 1 300px" className='timeline1'>
                     <Timeline
                         items={[
                             {

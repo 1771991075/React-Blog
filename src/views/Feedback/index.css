@@ -1,0 +1,19 @@
+.timeline1{
+    height: 400px;
+    overflow-y: scroll;
+    background-color: rgb(255,255,255);
+    padding: 20px;
+    border-radius: 10px;
+}
+.timeline1::-webkit-scrollbar{
+    width: 8px;
+    height: 9px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0);
+}
+.timeline1::-webkit-scrollbar-thumb{
+    border-radius: 15px;
+}
+.timeline1::-webkit-scrollbar-track{
+    border-radius: 8px;
+}
