@@ -15,15 +15,21 @@ const Index = () => {
     const items = [
         {
             key: 'bg1',
-            label: 'style1',
+            label: <div className='bgimg'>
+                <img src={bg1} alt="" />
+            </div>,
         },
         {
             key: 'bg2',
-            label: 'style2',
+            label: <div className='bgimg'>
+                <img src={bg2} alt="" />
+            </div>,
         },
         {
             key: 'bg3',
-            label: 'style3',
+            label: <div className='bgimg'>
+                <img src={bg3} alt="" />
+            </div>,
         },
     ];
     //定义默认展开的一级菜单key列表
